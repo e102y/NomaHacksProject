@@ -6,10 +6,10 @@ from bs4 import BeautifulSoup as banger
 #reads in the data from the buzzfeed political news set and performs word counting
 def strata(real):
     #change fs and fe depending on your os
-    fs = "C:/Users/Trent/Desktop/Hack-A-Thon/Horne2017_FakeNewsData/Buzzfeed Political News Dataset/Fake/"
+    fs = "C:/Users/_/Desktop/Hack-A-Thon/Horne2017_FakeNewsData/Buzzfeed Political News Dataset/Fake/"
     fe = "_Fake.txt"
     if(real):
-        fs = "C:/Users/Trent/Desktop/Hack-A-Thon/Horne2017_FakeNewsData/Buzzfeed Political News Dataset/Real/"
+        fs = "C:/Users/_/Desktop/Hack-A-Thon/Horne2017_FakeNewsData/Buzzfeed Political News Dataset/Real/"
         fe = "_Real.txt"
     wc = dict()
     for i in range(1, 48):
