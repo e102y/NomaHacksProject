@@ -1,15 +1,15 @@
 import requests
 from bs4 import BeautifulSoup as banger
-
+import os
 
 
 #reads in the data from the buzzfeed political news set and performs word counting
 def strata(real):
     #change fs and fe depending on your os
-    fs = "C:/Users/_/Desktop/Hack-A-Thon/Horne2017_FakeNewsData/Buzzfeed Political News Dataset/Fake/"
+    fs = "C:/Users/Trent/Desktop/Hack-A-Thon/Horne2017_FakeNewsData/Buzzfeed Political News Dataset/Fake/"
     fe = "_Fake.txt"
     if(real):
-        fs = "C:/Users/_/Desktop/Hack-A-Thon/Horne2017_FakeNewsData/Buzzfeed Political News Dataset/Real/"
+        fs = "C:/Users/Trent/Desktop/Hack-A-Thon/Horne2017_FakeNewsData/Buzzfeed Political News Dataset/Real/"
         fe = "_Real.txt"
     wc = dict()
     for i in range(1, 48):
@@ -28,6 +28,19 @@ def strata(real):
         f.close()
     return wc
 
+def realRead(real):
+    path = './Fake/'
+    if(real):
+        path = './Real/'
+    fs = os.scandir(path)
+    alto = []
+    for i in fs:
+        f = open(i)
+        fc = f.read()
+        f.close()
+        alto.append(fc)
+    return alto
+        
 #word counts by document
 #array of word counts
 #tuple with 0 fake 1 real
@@ -71,7 +84,10 @@ def stringToInt(s):
         for i in s:
             r = r*100
         return r
-
+def getData():
+    a = realRead(False)
+    b = realRead(True)
+    return (a+b)
 def main():
     '''
     gStrata1 = strata(False)
@@ -84,6 +100,7 @@ def main():
             print(i, ": ", j)
     return (gStrata1, gStrata2)
     '''
+    '''
     lStrata = encapsulateBuzzfeed()
     print("Fake: ")
     for i in lStrata[0]:
@@ -95,8 +112,9 @@ def main():
         for j,k in i.items():
             if(k>1):
                 print('\t', j, ": ", k)
-
-#main()
+    '''
+    for i in getData():
+        print(i)
 
 
 
@@ -119,7 +137,9 @@ def GetWebsiteFromUrl(url):
     text = style.get_text()
     lines = (line.strip() for line in text.splitlines())
     chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-    text = ' '.join(chunk for chunk in chunks if chunk)
+    text = '\n'.join(chunk for chunk in chunks if chunk)
     return text
+
+main()
 
 
