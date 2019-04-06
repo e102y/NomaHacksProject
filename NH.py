@@ -110,7 +110,8 @@ def main():
 def GetWebsiteFromUrl(url):
     html = requests.get(url)
     if(html.status_code >= 300):
-        exit(1)
+        raise Exception('bad url, error code: ', html.status_code)
+        return ""
     style = banger(html.text, 'html.parser')
     # kill all script and style elements
     for script in style(["script", "style"]):
